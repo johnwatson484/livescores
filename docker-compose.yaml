@@ -1,0 +1,8 @@
+version: '3.4'
+services:
+  livescores:
+    build: .
+    image: livescores
+    container_name: livescores
+    ports:
+      - "8000:80"
