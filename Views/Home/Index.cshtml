@@ -3,15 +3,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Livescores</h1>
-</div>
-
-@foreach (var fixture in Model)
-{
-    <div class="card">
-        <div class="card-body">
-            @fixture.HomeTeam vs @fixture.AwayTeam
-        </div>
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">Livescores</h1>
     </div>
-}
+
+    <div class="row">
+        @foreach (var fixture in Model)
+        {
+            <div class=col-4>
+                <div class="card text-right">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@fixture.HomeTeam <strong>@fixture.HomeScore</strong></li>
+                        <li class="list-group-item">@fixture.AwayTeam <strong>@fixture.AwayScore</strong></li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
