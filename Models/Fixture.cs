@@ -20,19 +20,19 @@ namespace Livescores.Models
 				switch(Competition)
 				{
 					case "PREMIER LEAGUE":
-					return 1;
+						return 1;
 					case "CHAMPIONSHIP":
-					return 2;
+						return 2;
 					case "LEAGUE ONE":
-					return 3;
+						return 3;
 					case "LEAGUE TWO":
-					return 4;
+						return 4;
 					case "THE FA CUP":
-					return 5;
+						return 5;
 					case "EFL CUP":
-					return 6;
+						return 6;
 					default:
-					return 7;
+						return 7;
 				}
 			}
 		}
