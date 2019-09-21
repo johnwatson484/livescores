@@ -21,7 +21,7 @@ namespace Livescores.Services
 			{
 				var json = client.DownloadString(url);
 				var fixtures = JsonConvert.DeserializeObject<List<Fixture>>(json);
-				return fixtures.OrderByDescending(x => x.Date).OrderBy(x => x.CompetitionRank).ThenBy(x => x.HomeTeam);
+				return fixtures.OrderByDescending(x => x.Date).ThenBy(x => x.CompetitionRank).ThenBy(x => x.HomeTeam);
 			}
 			catch (Exception)
 			{
