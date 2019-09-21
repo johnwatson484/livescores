@@ -27,7 +27,7 @@ namespace Livescores.Models
 					return 3;
 					case "LEAGUE TWO":
 					return 4;
-					case "FA CUP":
+					case "THE FA CUP":
 					return 5;
 					case "EFL CUP":
 					return 6;
