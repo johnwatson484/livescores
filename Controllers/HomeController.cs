@@ -7,44 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 using Livescores.Models;
 using System.Net;
 using Newtonsoft.Json;
+using Livescores.Services;
 
 namespace Livescores.Controllers
 {
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            string url = "https://lynxmagnus.com/footballscores/api/fixtures?startDate=";
+	public class HomeController : Controller
+	{
+		IApiService apiService;
+		public HomeController(IApiService apiService)
+		{
+			this.apiService = apiService;
+		}
 
-            url = string.Format("{0}{1}&endDate={2}", url, DateTime.Now.Date.AddDays(-7).ToString("s"), DateTime.Now.ToString("s"));
+		public IActionResult Index()
+		{
+			return View(apiService.GetFixtures());
+		}
 
-            string json;
-            List<Fixture> fixtures = new List<Fixture>();
-
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
-                    json = client.DownloadString(url);
-                }
-                catch (Exception)
-                {
-                    json = null;
-                }
-            }
-
-            if (json != null)
-            {
-                fixtures = JsonConvert.DeserializeObject<List<Fixture>>(json);  
-            }
-
-            return View(fixtures);
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }
