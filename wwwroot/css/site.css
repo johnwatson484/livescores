@@ -54,3 +54,15 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.date-list {
+  margin-bottom: 20px;
+}
+
+.fixture-card {
+  margin-bottom: 20px;
+}
+
+.scorer-list {
+  width: 50%;
+}
