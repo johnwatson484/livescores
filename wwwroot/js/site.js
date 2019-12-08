@@ -1,4 +1,34 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$('.date-picker').on('click', function () {
+  var selected = $(this).data('id')
+  setView(selected)
+  $(this).addClass('btn-primary')
+})
 
-// Write your JavaScript code.
+$(function () {
+  var selected = $('#today-id').first()
+
+  if (selected == null) {
+    selected = $('.date-picker').last()
+  }
+
+  setView(selected.data('id'))
+  selected.addClass('btn-primary')
+})
+
+function setView(selected) {
+
+  if (selected != null) {
+    $('.date-picker').each(function () {
+      $(this).removeClass('btn-primary')
+    })
+
+    $('.fixture-card').each(function () {
+      if ($(this).data('id') != selected) {
+        $(this).hide()
+      }
+      else {
+        $(this).fadeIn()
+      }
+    })
+  }
+}

@@ -8,10 +8,24 @@
 		<h1 class="display-4">Livescores</h1>
 	</div>
 
+	@if (Model.Select(x => x.Date.Date).Distinct().Count() > 1)
+	{
+			<div class="row">
+					<div class="col-md-12">
+							<div class="btn-group btn-group-justified">
+									@foreach (var date in Model.Select(x => x.Date.Date).Distinct())
+									{
+											<a href="#" class="btn btn-default date-picker" data-id="@date.Date" id="@(date.Date == DateTime.Now.Date ? "today-id" : "")">@(date == DateTime.Now.Date ? "Today" : date.ToString("d MMM"))</a>
+									}
+							</div>
+					</div>
+			</div>
+	}
+
 	<div class="row">
 		@foreach (var fixture in Model)
 		{
-			<div class="col-4" style="margin-bottom:20px;">
+			<div class="col-4 fixture-card" style="margin-bottom:20px;" data-id="@fixture.Date.Date">
 				<div class="card text-right">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">@fixture.HomeTeam <strong>@fixture.HomeScore</strong></li>
