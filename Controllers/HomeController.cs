@@ -11,23 +11,23 @@ using Livescores.Services;
 
 namespace Livescores.Controllers
 {
-	public class HomeController : Controller
-	{
-		IApiService apiService;
-		public HomeController(IApiService apiService)
-		{
-			this.apiService = apiService;
-		}
+    public class HomeController : Controller
+    {
+        IApiService apiService;
+        public HomeController(IApiService apiService)
+        {
+            this.apiService = apiService;
+        }
 
-		public IActionResult Index()
-		{
-			return View(apiService.GetFixtures());
-		}
+        public IActionResult Index()
+        {
+            return View(apiService.GetFixtures().OrderBy(x => x.Date).ThenBy(x => x.HomeTeam));
+        }
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
 }
