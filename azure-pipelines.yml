@@ -19,15 +19,18 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'livescores'
     projectName: 'livescores'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: SonarQubeAnalyze@4
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: SonarQubePublish@4
   inputs:
     pollingTimeoutSec: '300'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: DotNetCoreCLI@2
   inputs:
