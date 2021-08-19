@@ -15,24 +15,22 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: SonarQubePrepare@4
+
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: 'SonarQube'
+    SonarCloud: 'SonarCloud'
+    organization: 'johnwatson484'
     scannerMode: 'MSBuild'
-    projectKey: 'livescores'
-    projectName: 'livescores'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    projectKey: 'johnwatson484_livescores'
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- task: SonarQubeAnalyze@4
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+- task: SonarCloudAnalyze@1
 
-- task: SonarQubePublish@4
+- task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: DotNetCoreCLI@2
   inputs:
